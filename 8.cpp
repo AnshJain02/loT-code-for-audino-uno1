@@ -1,0 +1,22 @@
+const int ledPins[] = {2, 3, 4, 5, 6}; // Pins connected to the LEDs
+const int numLEDs = 5; // Number of LEDs
+
+void setup() {
+  Serial.begin(9600); // Initialize serial communication
+  // Set all LED pins as outputs
+  for (int i = 0; i < numLEDs; i++) {
+    pinMode(ledPins[i], OUTPUT);
+  }
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    char command = Serial.read(); // Read the command from serial monitor
+    if (command >= '1' && command <= '5') { // Check if the command is valid
+      int ledIndex = command - '1'; // Convert command to LED index (0-based)
+      digitalWrite(ledPins[ledIndex], !digitalRead(ledPins[ledIndex])); // Toggle the selected LED
+    }
+    else {
+      Serial.println("Invalid command. Please enter a number between 1 and 5.");
+    }
+  }
