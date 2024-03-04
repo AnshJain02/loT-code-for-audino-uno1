@@ -1,0 +1,28 @@
+// Define the array of LED pins
+const int ledPins[] = {2, 3, 4, 5, 6};
+// Calculate the number of LEDs based on the size of the array
+const int numLEDs = sizeof(ledPins) / sizeof(ledPins[0]);
+// Define the delay for fading
+const int fadeDelay = 15;
+
+void setup() {
+  // Set each LED pin as an output
+  for (int i = 0; i < numLEDs; i++) {
+    pinMode(ledPins[i], OUTPUT);
+  }
+}
+
+void loop() {
+  // Fade in each LED from off to full brightness
+  for (int i = 0; i < 256; i++) {
+    // Loop through each LED pin
+    for (int led = 0; led < numLEDs; led++) {
+      // Set the brightness of the current LED
+      analogWrite(ledPins[led], i);
+      // Delay for fading effect
+      delay(fadeDelay);
+    }
+  }
+  
+  // Fade out each LED from full brightness to off
+  for …
